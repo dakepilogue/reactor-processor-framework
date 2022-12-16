@@ -1,0 +1,30 @@
+stages:
+  - "检查dockerfile"
+  - "maven deploy"
+
+check_dockerfile:
+  stage: "检查dockerfile"
+  before_script:
+    - echo "start to check dockerfile ..."
+    - pwd
+    - export
+  script:
+    - bash /home/deployer/auto_development/dccheck.sh ./docker/Dockerfile
+  after_script:
+    - echo "check dockerfile finished !"
+  tags:
+    - processor-framework
+  allow_failure: true
+
+build_dockerfile:
+  stage: "maven deploy"
+  before_script: 
+    - echo "start to deploy/build dockerfile ..."
+  script:
+    - cd docker/
+    - bash ./deploy.sh
+  after_script:
+    - echo "deployment finished"
+  tags:
+    - processor-framework
+  allow_failure: true

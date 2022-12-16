@@ -4,16 +4,16 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.emotibot.framework</groupId>
+  <groupId>com.epilogue.framework</groupId>
   <artifactId>reactor-processor</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.14</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <checkstyle.version>3.1.1</checkstyle.version>
     <checkstyle.config>
-      https://gitlab.emotibot.com/mengzhenzhang/common-source/raw/master/google_checks.xml
+      https://raw.githubusercontent.com/dakepilogue/common-source/master/google_checks.xml
     </checkstyle.config>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -30,10 +30,11 @@
     <commons-io.version>2.6</commons-io.version>
     <commons-beanutils.version>1.9.4</commons-beanutils.version>
     <commons-lang3.version>3.9</commons-lang3.version>
-    <typesafe.config.version>1.4.0</typesafe.config.version>
+    <typesafe.config.version>1.4.0.1</typesafe.config.version>
     <slf4j.version>1.7.26</slf4j.version>
     <logback.version>1.2.3</logback.version>
 
+    <mockito.version>3.6.28</mockito.version>
     <reactor-core.version>3.3.3.RELEASE</reactor-core.version>
     <twitter.util.version>20.5.0</twitter.util.version>
     <spring.version>5.1.6.RELEASE</spring.version>
@@ -41,40 +42,18 @@
 
   <distributionManagement>
     <repository>
-      <id>central</id>
-      <name>dfebc32ff717-releases</name>
-      <url>http://docker-reg.emotibot.com.cn:8081/artifactory/libs-release-local</url>
+      <id>rdc-releases</id>
+      <name>rdc-releases</name>
+      <url>https://packages.aliyun.com/maven/repository/2314853-release-pOauLb</url>
     </repository>
     <snapshotRepository>
-      <id>snapshots</id>
-      <name>dfebc32ff717-snapshots</name>
-      <url>http://docker-reg.emotibot.com.cn:8081/artifactory/libs-snapshot-local</url>
+      <id>rdc-snapshots</id>
+      <name>rdc-snapshots</name>
+      <url>https://packages.aliyun.com/maven/repository/2314853-snapshot-5bgKBb</url>
     </snapshotRepository>
   </distributionManagement>
 
-  <repositories>
-    <repository>
-      <id>EmotibotRepoSnapshot</id>
-      <url>http://docker-reg.emotibot.com.cn:8081/artifactory/libs-snapshot-local</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>EmotibotRepoRelease</id>
-      <url>http://docker-reg.emotibot.com.cn:8081/artifactory/libs-release-local</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-    </repository>
-  </repositories>
-
   <dependencies>
-    <dependency>
-      <groupId>com.twitter</groupId>
-      <artifactId>util-core_2.12</artifactId>
-      <version>${twitter.util.version}</version>
-    </dependency>
     <dependency>
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-core</artifactId>
@@ -85,6 +64,12 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -174,16 +159,6 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.19.1</version>
-        <configuration>
-          <includes>
-            <include>**/*Test.java</include>
-          </includes>
-        </configuration>
       </plugin>
 
       <plugin>
